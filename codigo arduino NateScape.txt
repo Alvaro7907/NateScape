@@ -1,0 +1,30 @@
+#include <Arduino.h>
+
+// Pines del sensor de gas
+#define PIN_GAS A0
+
+// Pin del relé
+#define PIN_RELAY 10
+
+// Límite de concentración de gas
+#define LIMITE_CONCENTRACION 200
+
+void setup() {
+  // Inicializa el sensor de gas
+  pinMode(PIN_GAS, INPUT);
+
+  // Inicializa el relé
+  pinMode(PIN_RELAY, OUTPUT);
+}
+
+void loop() {
+  // Lee la concentración de gas
+  int concentracion = analogRead(PIN_GAS);
+
+  // Si la concentración es superior al límite, activa el ventilador
+  if (concentracion > LIMITE_CONCENTRACION) {
+    digitalWrite(PIN_RELAY, HIGH);
+  } else {
+    digitalWrite(PIN_RELAY, LOW);
+  }
+}
